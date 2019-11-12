@@ -1,0 +1,66 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	controllerName="ztest.Train_10_ChangeSet.controller.CreateOrder" xmlns:html="http://www.w3.org/1999/xhtml">
+	<semantic:SemanticPage id="createOrderPage" busy="{createOrderView>/busy}" busyIndicatorDelay="{createOrderView>/delay}">
+		<semantic:titleHeading>
+			<Title text="Create a new Order"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<f:SimpleForm id="idHeader" editable="true" layout="ResponsiveGridLayout" title="Header" labelSpanXL="3" labelSpanL="3"
+				labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1"
+				columnsL="1" columnsM="1" singleContainerFullSize="false">
+				<f:content>
+					<Label text="GrossAmount"/>
+					<Input value="{createOrderView>/salesOrder/GrossAmount}"/>
+					<Label text="Currency"/>
+					<Input value="{createOrderView>/salesOrder/CurrencyCode}"/>
+				</f:content>
+			</f:SimpleForm>			
+		</semantic:headerContent>
+		
+		<semantic:content>
+			<Table id="idItems" inset="false" items="{createOrderView>/items}">
+				<headerToolbar>
+					<Toolbar>
+						<content>
+							<Title text="Items"/>
+							<Button icon="sap-icon://add" press="onAddItem"></Button>
+						</content>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="Product Id"/>
+					</Column>
+					<Column>
+						<Text text="Quantity"/>
+					</Column>	
+					<Column>
+						<Text text="Unit"/>
+					</Column>
+					<Column>
+						<Text text="Price"/>
+					</Column>	
+					<Column>
+						<Text text="Amount"/>
+					</Column>					
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Input value="{createOrderView>Product}"></Input>
+							<Input value="{createOrderView>Quantity}"></Input>
+							<Input value="{createOrderView>Unit}"></Input>
+							<Input value="{createOrderView>Price}"></Input>
+							<Input value="{createOrderView>Amount}"></Input>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>			
+		</semantic:content>
+		<semantic:addAction>
+			<semantic:AddAction press="onSave"/>
+		</semantic:addAction>				
+	</semantic:SemanticPage>
+</mvc:View>
