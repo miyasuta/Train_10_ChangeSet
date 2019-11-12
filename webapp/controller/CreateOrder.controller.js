@@ -60,28 +60,26 @@ sap.ui.define([
 			var payload_h = oViewModel.getProperty("/salesOrder");
 			var payload_i = oViewModel.getProperty("/items");
 			
-			
 			//DeferredGroupを設定
 			//1回にまとめる場合は設定しなくても変わらない
 			oModel.setDeferredGroups(["group1"]);
 			
-			var oParams = {};
-			oParams.headers = {"content-ID": 1};
-			
 			//ヘッダの登録
-			oModel.create("/SalesOrderSet", payload_h, oParams);
+			oModel.create("/SalesOrderSet", payload_h, {
+				headers: {
+					"content-ID": 1
+				}
+			});
 			
 			//明細の登録
 			//まとめるとエラーになってしまうので1行ずつ
-			oParams.headers = "";
-			//oParams.groupId = "group2";
 			for (var i = 0; i < payload_i .length; i++) {
 				var oEntry = payload_i[i];
-				oModel.create("/$1/ToItems", oEntry, oParams);
+				oModel.create("/$1/ToItems", oEntry);
 			}
 			
 			//busyを設定
-			this.g_setBusy(true);
+			this._setBusy(true);
 			var that = this;
 			
 			//結果をサブミット
