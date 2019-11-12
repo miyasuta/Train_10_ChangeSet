@@ -68,14 +68,17 @@ sap.ui.define([
 			oModel.create("/SalesOrderSet", payload_h, {
 				headers: {
 					"content-ID": 1
-				}
+				},
+				groupId: "group1"
 			});
 			
 			//明細の登録
 			//まとめるとエラーになってしまうので1行ずつ
 			for (var i = 0; i < payload_i .length; i++) {
 				var oEntry = payload_i[i];
-				oModel.create("/$1/ToItems", oEntry);
+				oModel.create("/$1/ToItems", oEntry, {
+					groupId: "group1"
+				});
 			}
 			
 			//busyを設定
