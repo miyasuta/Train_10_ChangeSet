@@ -90,7 +90,8 @@ sap.ui.define([
 				success: function(data) {
 					//busyを解除
 					that._setBusy(false);
-					MessageToast.show("Sales order has been created");
+					var sSoId = data.__batchResponses[0].__changeResponses[0].data.SoId;
+					MessageToast.show("Sales order " + sSoId + " has been created");
 				},
 				error : function(e) {
 					that._setBusy(false);
